@@ -1,0 +1,35 @@
+name: Compile and Run C++ Programs
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install C++ Compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++
+
+      - name: Compile Question 1
+        run: g++ -std=c++17 -Wall -Wextra Question_1.cpp -o Question_1
+
+      - name: Compile Question 2
+        run: g++ -std=c++17 -Wall -Wextra Question_2.cpp -o Question_2
+
+      - name: Run Question 1
+        run: ./Question_1
+
+      - name: Run Question 2
+        run: ./Question_2
